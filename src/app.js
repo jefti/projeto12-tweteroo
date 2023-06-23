@@ -52,8 +52,21 @@ app.post(
         if(username && avatar){
             users.push({username, avatar});
             res.send("OK");
-        }
-    }
+        } else {
+            res.send("Faltam informações !!!")
+        }   
+     }
 )
+
+app.post('/tweets',(req,res)=>{
+    const {username,tweet}= req.body;
+    const teste = users.find(el=> el.username === username);
+    if(teste){
+        tweets.push({username, tweet});
+        res.send('ok');
+    }else{
+        res.send('UNAUTHORIZED');
+    }
+})
 
 app.listen(Port, ()=> console.log(`Servidor funcionando na porta ${Port}`));
